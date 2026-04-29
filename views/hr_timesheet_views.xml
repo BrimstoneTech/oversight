@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ANALYTIC LINE LIST VIEW INHERITANCE -->
+    <record id="view_account_analytic_line_tree_oversight_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.oversight</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="after">
+                <field name="oversight_task_progress" widget="progressbar" string="Task Progress"/>
+                <field name="oversight_efficiency_score" string="Efficiency"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ANALYTIC LINE FORM VIEW INHERITANCE -->
+    <record id="view_account_analytic_line_form_oversight_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.line.form.oversight</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="after">
+                <group string="OVERSIGHT Analytics">
+                    <field name="oversight_task_progress" widget="progressbar"/>
+                    <field name="oversight_efficiency_score"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

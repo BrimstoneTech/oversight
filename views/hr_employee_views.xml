@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_oversight_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.oversight</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- Smart Button for Delayed Tasks -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_delayed_tasks"
+                        class="oe_stat_button"
+                        icon="fa-exclamation-triangle"
+                        type="object"
+                        invisible="oversight_delayed_tasks == 0">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="oversight_delayed_tasks"/></span>
+                        <span class="o_stat_text">Delayed</span>
+                    </div>
+                </button>
+            </xpath>
+
+            <!-- KPI Dashboard in a new Page -->
+            <xpath expr="//notebook" position="inside">
+                <page string="OVERSIGHT Dashboard" name="oversight_dashboard">
+                    <group>
+                        <group string="Task Performance">
+                            <field name="oversight_task_progress" widget="progressbar"/>
+                            <field name="oversight_efficiency"/>
+                        </group>
+                        <group string="Labour Utility">
+                            <field name="oversight_total_hours" widget="float_time"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

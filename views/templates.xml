@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- OVERSIGHT: QWeb Portal Template -->
+<!-- Provides a lightweight web portal page for employees to view their own
+     performance KPIs without needing backend access. Managers see all
+     employees. This template follows the website.layout convention. -->
+<odoo>
+
+    <template id="portal_oversight_dashboard" name="OVERSIGHT — My Performance">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <div class="container mt-4 mb-5">
+                <!-- ── Header ───────────────────────────────────────── -->
+                <div class="row align-items-center mb-3">
+                    <div class="col">
+                        <h1 class="o_oversight_title" style="font-size:1.8rem; font-weight:700;">
+                            📊 OVERSIGHT — Performance Dashboard
+                        </h1>
+                        <p class="text-muted">
+                            Real-time task progress and efficiency metrics.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ── KPI Cards ─────────────────────────────────────── -->
+                <div class="row g-3">
+                    <!-- Task Progress Card -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-body text-center">
+                                <div class="display-6 fw-bold text-success">
+                                    <t t-esc="'%.1f' % (employee.oversight_task_progress or 0)"/>%
+                                </div>
+                                <p class="card-text text-muted">Avg. Task Progress</p>
+                                <div class="progress" style="height:10px;">
+                                    <div class="progress-bar bg-success"
+                                         role="progressbar"
+                                         t-att-style="'width:' + str(min(employee.oversight_task_progress or 0, 100)) + '%;'"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Efficiency Score Card -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-body text-center">
+                                <div class="display-6 fw-bold text-primary">
+                                    <t t-esc="'%.1f' % (employee.oversight_efficiency or 0)"/>
+                                </div>
+                                <p class="card-text text-muted">Efficiency Score</p>
+                                <small class="text-muted">Max score: 100</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hours Logged Card -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-body text-center">
+                                <div class="display-6 fw-bold text-info">
+                                    <t t-esc="'%.1f' % (employee.oversight_total_hours or 0)"/>
+                                </div>
+                                <p class="card-text text-muted">Hours Logged (30 days)</p>
+                                <t t-if="employee.oversight_delayed_tasks">
+                                    <span class="badge bg-danger">
+                                        <t t-esc="employee.oversight_delayed_tasks"/> Delayed Tasks
+                                    </span>
+                                </t>
+                                <t t-else="">
+                                    <span class="badge bg-success">No Delayed Tasks ✓</span>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /row -->
+
+                <!-- ── Footer note ───────────────────────────────────── -->
+                <div class="row mt-4">
+                    <div class="col text-center text-muted">
+                        <small>
+                            Powered by <strong>OVERSIGHT</strong> by BRIMSTONE Tech —
+                            data refreshes automatically every 24 hours.
+                        </small>
+                    </div>
+                </div>
+            </div><!-- /container -->
+        </t>
+    </template>
+
+</odoo>

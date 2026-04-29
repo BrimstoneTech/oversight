@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_analytic_line_oversight_user,account.analytic.line.oversight.user,analytic.model_account_analytic_line,hr_timesheet.group_hr_timesheet_user,1,1,1,0
+access_analytic_line_oversight_manager,account.analytic.line.oversight.manager,analytic.model_account_analytic_line,hr_timesheet.group_hr_timesheet_approver,1,1,1,1
+access_project_task_oversight_user,project.task.oversight.user,project.model_project_task,project.group_project_user,1,1,0,0
+access_project_task_oversight_manager,project.task.oversight.manager,project.model_project_task,project.group_project_manager,1,1,1,1
+access_hr_employee_oversight_officer,hr.employee.oversight.officer,hr.model_hr_employee,hr.group_hr_user,1,0,0,0
